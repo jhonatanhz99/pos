@@ -108,7 +108,6 @@ function Ventas() {
 
     setLoading(true);
     setServerError(null);
-    let ventaCreada = null;
     try {
       const ventaRes = await fetch("http://localhost:3000/api/ventas", {
         method: "POST",

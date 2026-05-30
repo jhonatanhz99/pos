@@ -61,4 +61,3 @@ jobs:
           CI: true
           NODE_OPTIONS: --openssl-legacy-provider
         run: npm test
-

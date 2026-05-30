@@ -28,7 +28,6 @@ function Inventario() {
   });
   const [busquedaProducto, setBusquedaProducto] = useState("");
   const [busquedaCliente, setBusquedaCliente] = useState("");
-  const [clienteNombre, setClienteNombre] = useState("");
 
   // Opciones únicas de usuarios y administradores (sin repetir)
   const opcionesUsuarios = [
@@ -81,14 +80,11 @@ function Inventario() {
   // Buscar nombre de cliente por cédula
   useEffect(() => {
     if (busquedaCliente.trim() === "") {
-      setClienteNombre("");
       setFiltros(f => ({ ...f, cedula: "" }));
       return;
     }
-    const cliente = clientes.find(c => String(c.cedula) === busquedaCliente.trim());
-    setClienteNombre(cliente ? `${cliente.primer_nombre} ${cliente.primer_apellido}` : "");
     setFiltros(f => ({ ...f, cedula: busquedaCliente }));
-  }, [busquedaCliente, clientes]);
+  }, [busquedaCliente]);
 
   // Filtrar ventas por todos los filtros
   const fetchVentas = async () => {
@@ -135,7 +131,6 @@ function Inventario() {
     });
     setBusquedaProducto("");
     setBusquedaCliente("");
-    setClienteNombre("");
     setProveedor("");
     setMetodoPago("");
     setFechaDesde("");
@@ -273,8 +268,6 @@ const exportarPDF = () => {
             onChange={e => {
               const cedulaSeleccionada = e.target.value;
               setFiltros(f => ({ ...f, cedula: cedulaSeleccionada }));
-              const cliente = clientes.find(c => String(c.cedula) === cedulaSeleccionada);
-              setClienteNombre(cliente ? `${cliente.primer_nombre} ${cliente.primer_apellido}` : "");
             }}
             style={{ minWidth: 220, padding: 6, borderRadius: 4, border: "1px solid #ccc" }}
           >
